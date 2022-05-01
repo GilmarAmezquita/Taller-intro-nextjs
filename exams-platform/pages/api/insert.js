@@ -4,18 +4,18 @@ export default async function Handler(req, res) {
     const {method, body} = req;
     if (method == 'POST') {
         console.log(req)
-        database.push({
-            name: body.name,
-            lastname: body.lastname,
-            student: body.student,
-            teacher: body.teacher,
-            username: body.username,
-            password: body.password
-        })
 
-        res.send({
-            response: "Hello World"
-        })
+        try {
+            let response = await database.query('INSERT INTO USERS VALUES ($1, $2, $3, $4, $5, $6)', [
+                body.name, body.lastname, body.student, body.teacher, body.username, body.password
+            ])
+    
+            res.send({
+                response: "Hello World"
+            })
+        } catch (error) {
+            console.log(error)
+        }
     }
     else {
         res.status(404)
