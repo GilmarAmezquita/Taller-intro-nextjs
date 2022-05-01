@@ -21,22 +21,20 @@ let handleChage = e => {
   }
 }
 
-let handleSubmit = async e => {
+let handleSubmit = async e =>{
   e.preventDefault();
-
   let config = {
-    method: 'POST',
-    header: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(state)
-  }
-
-  let r = await fetch("http://localhost:3000/api/insert", config)
-
-  console.log(r)
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(state)
+    }
+  let r = await fetch ("http://localhost:3000/api/insert",config)
+  console.log(r);
 }
+
 
 const SignUp = () => {
     return (
