@@ -1,48 +1,48 @@
 import Container from "../../components/Container";
-import useRouter from 'next/router'
-
-let handleClick = async e =>{
-    const router = useRouter();
-    e.preventDefault();
-    let config = {
-        method: 'GET',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        }
-    }
-    const username = document.getElementById(usernameLogin);
-    const password = document.getElementById(passwordLogin);
-    const res = await fetch ("/api/users/"+username, config)
-    const data = await res.json();
-    if(res.status === 200){
-        if(password === data.password){
-            if(data.student === true){
-                await router.push('/teacher/'+username, config);
-            }else{
-                await router.push('/student/'+username, config);
-            }
-        }
-    }else{
-        window.alert('Parece que las credenciales son incorrectas');
-    }
-}
-let unChange = async =>{
-    let i = document.createElement('i');
-    if(document.getElementById(usernameLogin) == 0){
-        i.className = 'fa-solid fa-circle-xmark';
-    }else i.className = 'fa-solid fa-circle-check';
-    document.getElementById("usernameMark").replaceChildren(i);
-}
-let psChange = async =>{
-    let i = document.createElement('i');
-    if(document.getElementById(passwordLogin) === ''){
-        i.className = 'fa-solid fa-circle-xmark';
-    }else i.className = 'fa-solid fa-circle-check';
-    document.getElementById("passwordMark").replaceChildren(i);
-}
+import {useRouter} from 'next/router'
 
 const Login = () => {
+    const router = useRouter();
+    let handleClick = async e =>{
+        e.preventDefault();
+        let config = {
+            method: 'GET',
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json'
+            }
+        }
+        const res = await fetch ("/api/users/"+document.getElementById(usernameLogin), config)
+        const data = await res.json();
+        if(res.status === 200){
+            if(document.getElementById(passwordLogin) === data.password){
+                if(data.student === true){
+                    await router.push('/teacher/'+username, config);
+                }else{
+                    await router.push('/student/'+username, config);
+                }
+            }
+        }else{
+            window.alert('Parece que las credenciales son incorrectas');
+        }
+    };
+
+    let unChange = async =>{
+        let i = document.createElement('i');
+        if(document.getElementById(usernameLogin) == 0){
+            i.className = 'fa-solid fa-circle-xmark';
+        }else i.className = 'fa-solid fa-circle-check';
+        document.getElementById("usernameMark").replaceChildren(i);
+    };
+    let psChange = async =>{
+        let i = document.createElement('i');
+        if(document.getElementById(passwordLogin) === ''){
+            i.className = 'fa-solid fa-circle-xmark';
+        }else i.className = 'fa-solid fa-circle-check';
+        document.getElementById("passwordMark").replaceChildren(i);
+    };
+
+
     return(
         <div>
             <Container title="Anamanaguchi Exams - Login"/>
