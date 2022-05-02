@@ -6,9 +6,10 @@ const Container = (props) => {
         <div>
             <Head>
                 <title>{props.title}</title>
-                <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/flatly/bootstrap.min.css"/>
+                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css"></link>
+                <script src="https://kit.fontawesome.com/e30e4457e3.js" crossorigin="anonymous"></script>
             </Head>
-            <Navigation/>
+            <Navigation login={props.login}/>
             <div>
                 {props.children}
             </div>
