@@ -11,6 +11,6 @@ export default async (req, res) => {
             return res.status(200).json(response.rows[0]);
         }
     }else{
-        return res.status(400).json('methos not allowed');
+        return res.status(400).json('Metodo no permitido');
     }
 }
