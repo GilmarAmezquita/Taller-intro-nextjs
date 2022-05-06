@@ -3,15 +3,30 @@ import {useRouter} from 'next/router'
 
 const Login = () => {
     const router = useRouter();
+
+    let state = {
+        usernameLogin:"",
+        passwordLogin :""
+    }
+
+    let handleChange = e => {
+        switch(e.target.name) {
+            case "usernameLogin": state.usernameLogin = e.target.value
+            case "passwordLogin": state.passwordLogin = e.target.value
+        }
+    }
+
     let handleClick = async e =>{
         e.preventDefault();
         let config = {
-            method: 'GET',
+            method: 'POST',
             headers: {
               'Accept': 'application/json',
               'Content-Type': 'application/json'
-            }
+            },
+            body: JSON.stringify(state)
         }
+        
         const res = await fetch ("/api/users/"+document.getElementById(usernameLogin), config)
         const data = await res.json();
         if(res.status === 200){
@@ -49,7 +64,7 @@ const Login = () => {
             <section className="section">
                 <div className="field">
                     <p className="control has-icons-left has-icons-right">
-                        <input className="input" id="usernameLogin" type="username" placeholder="Enter your username" onInput={unChange}/>
+                        <input className="input" name="usernameLogin" type="username" placeholder="Enter your username" onInput={unChange} onChange={handleChange}/>
                         <span className="icon is-small is-left">
                             <i className="fa-solid fa-user"></i>
                         </span>
@@ -60,7 +75,7 @@ const Login = () => {
                 </div>
                 <div className="field">
                     <p className="control has-icons-left has-icons-right">
-                        <input className="input" id="passwordLogin" type="password" placeholder="Enter your password" onInput={psChange}/>
+                        <input className="input" name="passwordLogin" type="password" placeholder="Enter your password" onInput={psChange} onChange={handleChange}/>
                         <span className="icon is-small is-left">
                             <i className="fas fa-lock"></i>
                         </span>
