@@ -12,13 +12,19 @@ let state = {
 
 let handleChage = e => {
   switch (e.target.name) {
-    case "name": state.name = e.target.value; 
+    case "name": state.name = e.target.value
     case "lastname": state.lastname = e.target.value
-    case "teacher": state.teacher = e.target.checked
-    case "student": state.student = e.target.checked
     case "username": state.username = e.target.value
     case "password": state.password = e.target.value
   }
+
+  if(document.getElementById("teacher").checked){
+    state.teacher = true
+  }
+  if(document.getElementById("student").checked){
+    state.student = true
+  }
+
 }
 
 let handleSubmit = async e =>{
@@ -49,8 +55,8 @@ const SignUp = () => {
         </div>
         <p>Role</p>
         <div className={styles.grid}>
-            Teacher<input type="radio" className={styles.card} name="role" id="teacher" onChange={handleChage}></input>
-            Student<input type="radio" className={styles.card} name="role" id="student" onChange={handleChage}></input>
+          Teacher<input type="radio" className={styles.card} name="role" id="teacher" onChange={handleChage}></input>
+          Student<input type="radio" className={styles.card} name="role" id="student" onChange={handleChage}></input>
         </div>
 
         <div className={styles.grid}>
