@@ -3,10 +3,11 @@ import Container from "../../components/Container";
 import styles from '../../styles/Home.module.css'
 
 let auxUsername = ""
+let auxIdCode = 2
 
 let state = {
     createdBy: "",
-    idCode: 2,
+    idCode: 0,
     accesCode: "",
     title: "",
     description: "",
@@ -48,7 +49,8 @@ let handleChange = e => {
 }
 
 let handleSubmit = async e => {
-    state.idCode = state.idCode + 1
+    auxIdCode++
+    state.idCode = auxIdCode
     window.alert(state.idCode + " code")
     state.createdBy = auxUsername
     e.preventDefault();

@@ -1,9 +1,9 @@
 import database from "../../data/database"
 
 export default async function Handler(req, res) {
-    console.log(req)
     const {method, body} = req;
     if (method == 'POST') {
+        //console.log(req)
         try {
             let response = await database.query('INSERT INTO EXAMS VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)',[
                 body.createdBy, 
