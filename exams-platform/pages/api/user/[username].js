@@ -23,6 +23,7 @@ export default async (req, res) => {
                     
                 })
             }else{
+                res.statusCode = 404;
                 res.json({
                     flag: false
                 })
