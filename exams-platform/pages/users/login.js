@@ -33,9 +33,9 @@ const Login = () => {
         
         if(res.status == 200){
             if(data.role === "teacher"){
-                await router.push('/teacher/'+data.nickname, config);
+                await router.push('http://localhost:3000/teacher/'+data.nickname)
             }else if(data.role === "student") {
-                await router.push('/student/'+data.nickname, config);
+                await router.push('http://localhost:3000/student/'+data.nickname)
             }
         }else{
             window.alert('Parece que las credenciales son incorrectas');
