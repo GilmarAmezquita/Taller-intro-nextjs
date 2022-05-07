@@ -7,10 +7,20 @@ export default async (req, res) => {
             break;
         case 'POST':
             let response = await db.query('SELECT * FROM USERS WHERE USERNAME = $1 AND PASSWORD = $2', [req.body.usernameLogin, req.body.passwordLogin]);
-            if(response.rows && response.length > 0){
+            
+            if(response.rows.length > 0){
+                let role = ""
+                if(response.rows[0].student == true) {
+                    role = "student"
+                }
+                else if(response.rows[0].teacher == true) {
+                    role = "teacher"
+                }
                 res.json({
                     flag: true,
-                    nickname: response.rows[0].username
+                    nickname: response.rows[0].username,
+                    role
+                    
                 })
             }else{
                 res.json({

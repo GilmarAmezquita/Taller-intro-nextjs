@@ -12,7 +12,7 @@ function studentHome ({data}) {
     )
 }
 
-studentHome.getInitialProps = async (req, res) => {
+/**studentHome.getInitialProps = async (req, res) => {
     let config = {
         method: 'GET',
         headers: {
@@ -20,9 +20,9 @@ studentHome.getInitialProps = async (req, res) => {
             'Content-Type': 'application/json'
         },
     }
-    const response = await fetch('http://localhost:3000/api/users/' + req.query.username, config);
+    const response = await fetch('http://localhost:3000/api/users/' + req.query.usernameLogin, config);
     const data = await response.json();
     return { data };
-}
+}**/
 
 export default studentHome

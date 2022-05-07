@@ -32,7 +32,7 @@ let handleSubmit = async e =>{
       body: JSON.stringify(state)
     }
   let r = await fetch ("http://localhost:3000/api/insert",config)
-  console.log(r);
+  //console.log(r);
 }
 
 

@@ -30,13 +30,12 @@ const Login = () => {
         
         const res = await fetch ("/api/user/"+document.getElementById(usernameLogin), config)
         const data = await res.json();
-        if(res.status === 200){
-            if(document.getElementById(passwordLogin) === data.password){
-                if(data.student === true){
-                    await router.push('/teacher/'+username, config);
-                }else{
-                    await router.push('/student/'+username, config);
-                }
+        
+        if(res.status == 200){
+            if(data.role === "teacher"){
+                await router.push('/teacher/'+data.nickname, config);
+            }else if(data.role === "student") {
+                await router.push('/student/'+data.nickname, config);
             }
         }else{
             window.alert('Parece que las credenciales son incorrectas');
