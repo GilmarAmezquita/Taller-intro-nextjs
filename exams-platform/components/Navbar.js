@@ -20,7 +20,7 @@ const Navbar = (props) => {
         <div className="navbar-end">
           <div className="navbar-item">
             <div className="buttons">
-              <a className="button is-primary">
+              <a className="button is-primary" href="signUp">
                 <strong>Sign up</strong>
               </a>
               <a className="button is-light" href="/users/login">Log in</a>
