@@ -51,19 +51,33 @@ let handleChange = e => {
 let handleSubmit = async e => {
     auxIdCode++
     state.idCode = auxIdCode
-    window.alert(state.idCode + " code")
     state.createdBy = auxUsername
     e.preventDefault();
 
-    let config = {
-        method: 'POST',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(state)
+    if(state.accesCode != "" &&
+        state.title != "" &&
+        state.description != "" &&
+        state.question !="" &&
+        state.answerA !="" &&
+        state.answerB !="" &&
+        state.answerC !="" &&
+        state.answerD !="" &&
+        state.answer != ""
+    ) {
+        let config = {
+            method: 'POST',
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(state)
+        }
+        let r = await fetch("http://localhost:3000/api/insertExam",config)
     }
-    let r = await fetch("http://localhost:3000/api/insertExam",config)
+    else {
+        window.alert("Please, fill each blank")
+    }
+
 }
 
 const teacherHome = () =>{
@@ -76,44 +90,51 @@ const teacherHome = () =>{
             <div className={styles.title}>
                 <h1>Hello teacher <a>{userName}</a></h1>
             </div>
-            <div>
+            <div className={styles.examCreate}>
                 <h2>Welcome to the exams creation module</h2>
-                <form onSubmit={handleSubmit}>
+                <form className={styles.examCreate} onSubmit={handleSubmit}>
                     <div>
-                        <input placeholder='Type an acces code for this exam' name="accesCode" onChange={handleChange}></input>
+                        <input className={styles.inputsFormat} placeholder='Type an acces code for this exam' name="accesCode" onChange={handleChange}></input>
                     </div>
                     <div>
-                        <input placeholder='Type the title of this exam' name='title' onChange={handleChange}></input>
+                        <input className={styles.inputsFormat} placeholder='Type the title of this exam' name='title' onChange={handleChange}></input>
                     </div>
                     <div>
-                        <input placeholder='Type a description for it' name='description' onChange={handleChange}></input>
+                        <input className={styles.inputsFormat} placeholder='Type a description for it' name='description' onChange={handleChange}></input>
                     </div>
-                    <div>
+                    <div className={styles.examCreate}>
                         <h2>Question</h2>
-                        <input placeholder='Type the question' name='question' onChange={handleChange}></input>
+                        <input className={styles.inputsFormat} placeholder='Type the question' name='question' onChange={handleChange}></input>
                     </div>
-                    <div>
+                    <div className={styles.examCreate}>
                         <h2>Answer Options</h2>
-                        <b>A</b> <input placeholder='Type the question' name='answerA' onChange={handleChange}></input>
                     </div>
                     <div>
-                        <b>B</b> <input placeholder='Type the question' name='answerB' onChange={handleChange}></input>
+                        <b>A</b> <input className={styles.inputsFormat} placeholder='Type one answer' name='answerA' onChange={handleChange}></input>
                     </div>
                     <div>
-                        <b>C</b> <input placeholder='Type the question' name='answerC' onChange={handleChange}></input>
+                        <b>B</b> <input className={styles.inputsFormat} placeholder='Type one answer' name='answerB' onChange={handleChange}></input>
                     </div>
                     <div>
-                        <b>D</b> <input placeholder='Type the question' name='answerD' onChange={handleChange}></input>
+                        <b>C</b> <input className={styles.inputsFormat} placeholder='Type one answer' name='answerC' onChange={handleChange}></input>
                     </div>
                     <div>
-                        <b>Select the answer</b>
-                        <br></br> 
-                        A <input type="radio" name="answer" id='A' onChange={handleChange}></input>
-                        B <input type="radio" name="answer" id='B' onChange={handleChange}></input>
-                        C <input type="radio" name="answer" id='C' onChange={handleChange}></input>
-                        D <input type="radio" name="answer" id='D' onChange={handleChange}></input>
+                        <b>D</b> <input className={styles.inputsFormat} placeholder='Type one answer' name='answerD' onChange={handleChange}></input>
                     </div>
                     <div>
+                        <b>Select the correct answer</b>
+                        
+                    </div>
+                    <div className={styles.radiosBtnFormat}>
+                        <br></br>
+                        <br></br>
+                        <b className={styles.bSeparator}>A</b> <input  type="radio" name="answer" id='A' onChange={handleChange}></input>
+                        <b className={styles.bSeparator}>B</b> <input type="radio" name="answer" id='B' onChange={handleChange}></input>
+                        <b className={styles.bSeparator}>C</b> <input type="radio" name="answer" id='C' onChange={handleChange}></input>
+                        <b className={styles.bSeparator}>D</b> <input type="radio" name="answer" id='D' onChange={handleChange}></input> 
+                    </div>
+                    <div>
+                    <br></br>
                         <input className="button is-primary" type="submit" value="Save"></input>
                     </div>
                 </form>

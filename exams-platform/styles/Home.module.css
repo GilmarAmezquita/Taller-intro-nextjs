@@ -108,6 +108,31 @@
   margin-left: 0.5rem;
 }
 
+.examCreate {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.inputsFormat {
+  margin: 10px;
+  width: 500px;
+  height: 30px;
+}
+
+.radiosBtnFormat {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.bSeparator {
+  margin: 10px;
+}
+
 @media (max-width: 600px) {
   .grid {
     width: 100%;

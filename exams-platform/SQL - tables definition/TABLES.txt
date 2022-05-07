@@ -1,0 +1,63 @@
+CREATE TABLE USERS (
+	NAME VARCHAR(30),
+	LASTNAME VARCHAR(30),
+	STUDENT BOOLEAN,
+	TEACHER BOOLEAN,
+	USERNAME VARCHAR(30),
+	PASSWORD VARCHAR(20),
+	PRIMARY KEY(USERNAME)
+);
+
+INSERT INTO USERS VALUES('Louis','Vuitton',TRUE, FALSE, 'Lvuiton', '123');
+INSERT INTO USERS VALUES('Anova','Carvajal',FALSE, TRUE, 'anovix13', '123');
+INSERT INTO USERS VALUES('Eli','Smith',TRUE, FALSE, 'mikux77', '12345');
+INSERT INTO USERS VALUES('Andre','Lemon',FALSE, TRUE, 'camoni', 'velikolepno');
+
+CREATE TABLE EXAMS (
+	CREATEDBY VARCHAR(30),
+	IDCODE INTEGER,
+	ACCESCODE VARCHAR,
+	TITLE VARCHAR(50),
+	DESCRIPTION VARCHAR(100),
+	QUESTION VARCHAR,
+	ANSWER_A VARCHAR,
+	ANSWER_B VARCHAR,
+	ANSWER_C VARCHAR,
+	ANSWER_D VARCHAR,
+	CORRECT_ANSWER CHAR 
+	CHECK(CORRECT_ANSWER = 'A' OR CORRECT_ANSWER = 'B' OR CORRECT_ANSWER = 'C' OR CORRECT_ANSWER = 'D'),
+	PRIMARY KEY(IDCODE),
+	FOREIGN KEY(CREATEDBY)
+	REFERENCES USERS(USERNAME)
+);
+
+INSERT INTO EXAMS VALUES(
+	'anovix13',
+	1,
+	'9T9',
+	'General Culture',
+	'Here you will prove your knowledge about general culture',
+	'What is the longest river in the world?',
+	'Amazonas',
+	'Nilo',
+	'Yellow river',
+	'Bravo river',
+	'A'
+);
+
+INSERT INTO EXAMS VALUES(
+	'camoni',
+	2,
+	'1106',
+	'Authors',
+	'I will test your knowledge about authors',
+	'Who wrote the novel El quijote de la mancha?',
+	'William Shakespeare',
+	'Oscar Wilde',
+	'Miguel de Cervantes',
+	'Jane Austen',
+	'C'
+);
+
+SELECT * FROM USERS;
+SELECT * FROM EXAMS;
