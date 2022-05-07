@@ -6,22 +6,30 @@ let state = {
     createdBy: "",
     idCode: "",
     accesCode: "",
-    questionA: "",
-    questionB: "",
-    questionC: "",
-    questionD: "",
+    title: "",
+    description: "",
+    answerA: "",
+    answerB: "",
+    answerC: "",
+    answerD: "",
     answer: ""
 }
 
 let handleChange = e => {
+    const router = useRouter();
+    const userName = router.query.username;
+
+    state.createdBy = {userName}
+
     switch (e.target.name) {
-        case "createdBy": state.createdBy = e.target.value
         case "idCode": state.idCode = e.target.value
         case "accesCode": state.accesCode = e.target.value
-        case "questionA": state.questionA = e.target.value
-        case "questionB": state.questionB = e.target.value
-        case "questionC": state.questionC = e.target.value
-        case "questionD": state.questionD = e.target.value
+        case "title": state.title = e.target.value
+        case "description": state.description = e.target.value
+        case "answerA": state.answerA = e.target.value
+        case "answerB": state.answerB = e.target.value
+        case "answerC": state.answerC = e.target.value
+        case "answerD": state.answerD = e.target.value
     }
 
     if(document.getElementById("A").checked) {
@@ -37,7 +45,7 @@ let handleChange = e => {
     }
 
     if(document.getElementById("D").checked) {
-        state.answer = "D"
+        state.ananswer = "D"
     }
     
 }
@@ -70,16 +78,27 @@ const teacherHome = () =>{
                 <h2>Welcome to the exams creation module</h2>
                 <form onSubmit={handleSubmit}>
                     <div>
-                        <b>A</b> <input placeholder='Type the question' name='questionA' onChange={handleChange}></input>
+                        <input placeholder='Type the title of this exam' name='title'></input>
                     </div>
                     <div>
-                        <b>B</b> <input placeholder='Type the question' name='questionB' onChange={handleChange}></input>
+                        <input placeholder='Type a description for it' name='description'></input>
                     </div>
                     <div>
-                        <b>C</b> <input placeholder='Type the question' name='questionC' onChange={handleChange}></input>
+                        <h2>Question</h2>
+                        <input placeholder='Type the question'></input>
                     </div>
                     <div>
-                        <b>D</b> <input placeholder='Type the question' name='questionD' onChange={handleChange}></input>
+                        <h2>Answer Options</h2>
+                        <b>A</b> <input placeholder='Type the question' name='answerA' onChange={handleChange}></input>
+                    </div>
+                    <div>
+                        <b>B</b> <input placeholder='Type the question' name='answerB' onChange={handleChange}></input>
+                    </div>
+                    <div>
+                        <b>C</b> <input placeholder='Type the question' name='answerC' onChange={handleChange}></input>
+                    </div>
+                    <div>
+                        <b>D</b> <input placeholder='Type the question' name='answerD' onChange={handleChange}></input>
                     </div>
                     <div>
                         <b>Select the answer</b>
