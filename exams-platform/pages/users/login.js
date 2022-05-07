@@ -6,9 +6,10 @@ const Login = () => {
 
     let state = {
         usernameLogin:"",
-        passwordLogin :""
+        passwordLogin:""
+        
     }
-
+    
     let handleChange = e => {
         switch(e.target.name) {
             case "usernameLogin": state.usernameLogin = e.target.value
@@ -16,7 +17,7 @@ const Login = () => {
         }
     }
 
-    let handleClick = async e =>{
+    let handleSubmit = async e =>{
         e.preventDefault();
         let config = {
             method: 'POST',
@@ -27,7 +28,7 @@ const Login = () => {
             body: JSON.stringify(state)
         }
         
-        const res = await fetch ("/api/users/"+document.getElementById(usernameLogin), config)
+        const res = await fetch ("/api/user/"+document.getElementById(usernameLogin), config)
         const data = await res.json();
         if(res.status === 200){
             if(document.getElementById(passwordLogin) === data.password){
@@ -57,14 +58,14 @@ const Login = () => {
         document.getElementById("passwordMark").replaceChildren(i);
     };
 
-
     return(
         <div>
             <Container title="Anamanaguchi Exams - Login"/>
             <section className="section">
+                <form onSubmit={handleSubmit}>
                 <div className="field">
                     <p className="control has-icons-left has-icons-right">
-                        <input className="input" name="usernameLogin" type="username" placeholder="Enter your username" onInput={unChange} onChange={handleChange}/>
+                        <input className="input" id="usernameLogin" name="usernameLogin" type="username" placeholder="Enter your username" onInput={unChange}  onChange={handleChange}/>
                         <span className="icon is-small is-left">
                             <i className="fa-solid fa-user"></i>
                         </span>
@@ -75,7 +76,7 @@ const Login = () => {
                 </div>
                 <div className="field">
                     <p className="control has-icons-left has-icons-right">
-                        <input className="input" name="passwordLogin" type="password" placeholder="Enter your password" onInput={psChange} onChange={handleChange}/>
+                        <input className="input" id="passwordLogin" name="passwordLogin" type="password" placeholder="Enter your password" onInput={psChange} onChange={handleChange}/>
                         <span className="icon is-small is-left">
                             <i className="fas fa-lock"></i>
                         </span>
@@ -86,11 +87,10 @@ const Login = () => {
                 </div>
                 <div className="field">
                     <p className="control">
-                        <button className="button is-primary" id="login_submit_btn" onClick={handleClick}>
-                        Login
-                        </button>
+                        <input type="submit" className="button is-primary" id="login_submit_btn" value="Log In"></input>
                     </p>
                 </div>
+                </form>
             </section>
         </div>
     )
