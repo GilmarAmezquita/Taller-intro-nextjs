@@ -1,10 +1,12 @@
 import {useRouter} from 'next/router'
+import Container from "../../components/Container";
 
 function studentHome ({data}) {
     const router = useRouter();
     const userName = router.query.username;
     return(
         <div>
+            <Container title= "Anamanaguchi Exams - Student"/>
             <div>
                 <h1>Hello student {userName}</h1>
             </div>

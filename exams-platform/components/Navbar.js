@@ -14,7 +14,7 @@ const Navbar = (props) => {
       <nav className="navbar" role="navigation" aria-label="main navigation">
         <div id="navbarBasicExample" className="navbar-menu">
           <div className="navbar-start">
-            <a className="navbar-item" href="/">Home</a>
+            <a className="navbar-item" href="/"><b>Home</b></a>
         </div>
 
         <div className="navbar-end">
