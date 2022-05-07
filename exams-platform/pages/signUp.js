@@ -29,15 +29,41 @@ let handleChage = e => {
 
 let handleSubmit = async e =>{
   e.preventDefault();
-  let config = {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(state)
+  if(state.name != "" &&
+     state.lastname != "" &&
+     state.username != "" &&
+     state.password != ""
+  ) {
+    if(state.teacher == false && state.student == true) {
+      let config = {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(state)
+      }
+     let r = await fetch ("http://localhost:3000/api/insert",config)
     }
-  let r = await fetch ("http://localhost:3000/api/insert",config)
+    else if(state.teacher == true && state.student == false) {
+      let config = {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(state)
+      }
+     let r = await fetch ("http://localhost:3000/api/insert",config)
+    }
+    else {
+      window.alert("Please fill each blank")
+    }
+  }
+  else {
+    window.alert("Please fill each blank")
+  }
+
   //console.log(r);
 }
 
