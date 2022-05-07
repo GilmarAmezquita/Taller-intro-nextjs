@@ -2,12 +2,15 @@ import {useRouter} from 'next/router'
 import Container from "../../components/Container";
 import styles from '../../styles/Home.module.css'
 
+let auxUsername = ""
+
 let state = {
     createdBy: "",
-    idCode: "",
+    idCode: 2,
     accesCode: "",
     title: "",
     description: "",
+    question: "",
     answerA: "",
     answerB: "",
     answerC: "",
@@ -16,15 +19,10 @@ let state = {
 }
 
 let handleChange = e => {
-    const router = useRouter();
-    const userName = router.query.username;
-
-    state.createdBy = {userName}
-
     switch (e.target.name) {
-        case "idCode": state.idCode = e.target.value
         case "accesCode": state.accesCode = e.target.value
         case "title": state.title = e.target.value
+        case "question": state.question = e.target.value
         case "description": state.description = e.target.value
         case "answerA": state.answerA = e.target.value
         case "answerB": state.answerB = e.target.value
@@ -45,29 +43,31 @@ let handleChange = e => {
     }
 
     if(document.getElementById("D").checked) {
-        state.ananswer = "D"
-    }
-    
+        state.answer = "D"
+    } 
 }
 
 let handleSubmit = async e => {
+    state.idCode = state.idCode + 1
+    window.alert(state.idCode + " code")
+    state.createdBy = auxUsername
     e.preventDefault();
 
     let config = {
         method: 'POST',
-        header: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
         },
         body: JSON.stringify(state)
     }
-    
     let r = await fetch("http://localhost:3000/api/insertExam",config)
 }
 
 const teacherHome = () =>{
     const router = useRouter();
     const userName = router.query.username;
+    auxUsername = userName;
     return(
         <div>
             <Container title="Anamanaguchi Exams - Teacher"/>
@@ -78,14 +78,17 @@ const teacherHome = () =>{
                 <h2>Welcome to the exams creation module</h2>
                 <form onSubmit={handleSubmit}>
                     <div>
-                        <input placeholder='Type the title of this exam' name='title'></input>
+                        <input placeholder='Type an acces code for this exam' name="accesCode" onChange={handleChange}></input>
                     </div>
                     <div>
-                        <input placeholder='Type a description for it' name='description'></input>
+                        <input placeholder='Type the title of this exam' name='title' onChange={handleChange}></input>
+                    </div>
+                    <div>
+                        <input placeholder='Type a description for it' name='description' onChange={handleChange}></input>
                     </div>
                     <div>
                         <h2>Question</h2>
-                        <input placeholder='Type the question'></input>
+                        <input placeholder='Type the question' name='question' onChange={handleChange}></input>
                     </div>
                     <div>
                         <h2>Answer Options</h2>
@@ -103,10 +106,10 @@ const teacherHome = () =>{
                     <div>
                         <b>Select the answer</b>
                         <br></br> 
-                        A <input type="radio" name="answer" id='A'></input>
-                        B <input type="radio" name="answer" id='B'></input>
-                        C <input type="radio" name="answer" id='C'></input>
-                        D <input type="radio" name="answer" id='D'></input>
+                        A <input type="radio" name="answer" id='A' onChange={handleChange}></input>
+                        B <input type="radio" name="answer" id='B' onChange={handleChange}></input>
+                        C <input type="radio" name="answer" id='C' onChange={handleChange}></input>
+                        D <input type="radio" name="answer" id='D' onChange={handleChange}></input>
                     </div>
                     <div>
                         <input className="button is-primary" type="submit" value="Save"></input>

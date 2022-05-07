@@ -54,7 +54,7 @@ let handleSubmit = async e =>{
         },
         body: JSON.stringify(state)
       }
-     let r = await fetch ("http://localhost:3000/api/insert",config)
+     let r = await fetch ("http://localhost:3000/api/insertUser",config)
     }
     else {
       window.alert("Please fill each blank")
