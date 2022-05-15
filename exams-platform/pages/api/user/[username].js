@@ -1,16 +1,33 @@
-import {db} from '../../../data/database';
+import db from '../../../data/database';
 
 export default async (req, res) => {
-    const {method, body} = req;
-    if(method == 'GET'){
-        const query = "SELECT * FROM USERS WHERE USERNAME = '"+req.query.username+"'";
-        const response = await db.query(query);
-        if(response.rows[0] == undefined){
-            return res.status(400).json({username: req.query.username});
-        }else{
-            return res.status(200).json(response.rows[0]);
-        }
-    }else{
-        return res.status(400).json('methos not allowed');
+    switch (req.method){
+        case 'GET': 
+            res.statusCode = 404; 
+            break;
+        case 'POST':
+            let response = await db.query('SELECT * FROM USERS WHERE USERNAME = $1 AND PASSWORD = $2', [req.body.usernameLogin, req.body.passwordLogin]);
+            
+            if(response.rows.length > 0){
+                let role = ""
+                if(response.rows[0].student == true) {
+                    role = "student"
+                }
+                else if(response.rows[0].teacher == true) {
+                    role = "teacher"
+                }
+                res.json({
+                    flag: true,
+                    nickname: response.rows[0].username,
+                    role
+                    
+                })
+            }else{
+                res.statusCode = 404;
+                res.json({
+                    flag: false
+                })
+            }
+            break;
     }
 }

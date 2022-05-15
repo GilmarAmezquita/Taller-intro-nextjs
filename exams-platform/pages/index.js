@@ -18,31 +18,7 @@ export default function Home() {
         <p className={styles.description}>
             Welcome!
         </p>
-        <div>
-            <h2>Username</h2>
-            <input placeholder="anamanaguchi"></input>
-
-            <h2>Password</h2>
-            <input type="password" placeholder="1234"></input>
-        </div> 
-
-        <div>
-          <a
-            href="home"
-          >
-            <h2>log in &rarr;</h2>
-          </a>
-        </div>
-
-        <div >
-          <a
-            href="signUp"
-          >
-            <h2>Sign Up &rarr;</h2>
-          </a>
-        </div>
       </main>
-
       <footer className={styles.footer}>
         <a
           href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
